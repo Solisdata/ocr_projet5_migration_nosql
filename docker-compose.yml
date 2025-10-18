@@ -3,7 +3,7 @@
 services:
   mongo:
     image: mongo:6.0   # image officielle MongoDB
-    container_name: my_mongo
+    container_name: my_mongo_new
     restart: "no"
     ports:
       - "27017:27017"
@@ -14,7 +14,7 @@ services:
 
   app:
     build: .
-    container_name: healthcare_app
+    container_name: healthcare_app_new
     restart: "no"
     networks:
       - my_network
@@ -22,9 +22,26 @@ services:
       - MONGO_URI=${MONGO_URI}
     volumes :
      - ./data:/app/data
-    command: python scripts/main.py
+    command: python script/main.py
     depends_on:
      - mongo
+  
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: healthcare_tests
+    networks:
+      - my_network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/
+      - DB_NAME=ma_bd
+      - COLLECTION_NAME=patients
+    volumes:
+      - ./data:/app/data
+      - .:/app
+    depends_on:
+      - mongo
 
 volumes:
   mongo_data:
