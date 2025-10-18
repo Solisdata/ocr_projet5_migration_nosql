@@ -1,0 +1,34 @@
+# Configuration Docker pour l'environnement de travail
+
+services:
+  mongo:
+    image: mongo:6.0   # image officielle MongoDB
+    container_name: my_mongo
+    restart: "no"
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - my_network
+
+  app:
+    build: .
+    container_name: healthcare_app
+    restart: "no"
+    networks:
+      - my_network
+    environment:
+      - MONGO_URI=${MONGO_URI}
+    volumes :
+     - ./data:/app/data
+    command: python scripts/main.py
+    depends_on:
+     - mongo
+
+volumes:
+  mongo_data:
+
+networks:
+  my_network:
+    driver: bridge
