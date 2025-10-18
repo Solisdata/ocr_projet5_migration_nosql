@@ -25,6 +25,23 @@ services:
     command: python script/main.py
     depends_on:
      - mongo
+  
+  tests:
+    build:
+      context: .
+      dockerfile: Dockerfile.test
+    container_name: healthcare_tests
+    networks:
+      - my_network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/
+      - DB_NAME=ma_bd
+      - COLLECTION_NAME=patients
+    volumes:
+      - ./data:/app/data
+      - .:/app
+    depends_on:
+      - mongo
 
 volumes:
   mongo_data:
