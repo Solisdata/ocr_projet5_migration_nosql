@@ -27,8 +27,11 @@ services:
     networks:
       - my_network
     environment:
-      - MONGO_URI=${MONGO_URI}
-    volumes :
+      - MONGO_ROOT_USER=${MONGO_ROOT_USER}
+      - MONGO_ROOT_PASS=${MONGO_ROOT_PASS}
+      - DB_NAME=${DB_NAME}
+      - COLLECTION_NAME=${COLLECTION_NAME}
+    volumes:
      - ./data:/app/data
     command: python script/main.py
     depends_on:
@@ -42,9 +45,10 @@ services:
     networks:
       - my_network
     environment:
-      - MONGO_URI=mongodb://mongo:27017/
-      - DB_NAME=ma_bd
-      - COLLECTION_NAME=patients
+      - MONGO_ROOT_USER=${MONGO_ROOT_USER}
+      - MONGO_ROOT_PASS=${MONGO_ROOT_PASS}
+      - DB_NAME=${DB_NAME}
+      - COLLECTION_NAME=${COLLECTION_NAME}
     volumes:
       - ./data:/app/data
       - .:/app

@@ -41,20 +41,26 @@ def clean_dataframe(df):
 # # reprends mon environnement
 load_dotenv()
 
-MONGO_URI = os.getenv("MONGO_URI")
+# Récupérer les variables
+MONGO_ROOT_USER = os.getenv("MONGO_ROOT_USER")
+MONGO_ROOT_PASS = os.getenv("MONGO_ROOT_PASS")
 DB_NAME = os.getenv("DB_NAME")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 
-# # connection
-def connect_mongo(uri=MONGO_URI, db_name=DB_NAME, collection_name=COLLECTION_NAME):
-    "Connexion à MongoDB et renvoie la collection"
-    client = MongoClient(uri)
+def connect_mongo(user=MONGO_ROOT_USER, password=MONGO_ROOT_PASS, db_name=DB_NAME, collection_name=COLLECTION_NAME):
+    """Connexion à MongoDB avec authentification"""
+    uri = f"mongodb://{user}:{password}@mongo:27017/{db_name}?authSource=admin"
+    try:
+        client = MongoClient(uri, serverSelectionTimeoutMS=5000)
+    except Exception as e:
+        print("Erreur de connexion MongoDB :", e)
+        raise e
     db = client[db_name]
-    collection = db[collection_name]
-    return collection
+    return db[collection_name]
 
-#création fonction CRUD
+
+
 
 def create_patient(collection, data):
     """Insère un document dans la collection"""
