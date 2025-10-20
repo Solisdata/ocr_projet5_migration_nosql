@@ -5,10 +5,18 @@ services:
     image: mongo:6.0   # image officielle MongoDB
     container_name: my_mongo_new
     restart: "no"
+    command: ["--auth"]
+    env_file:
+      - .env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASS}
+      MONGO_INITDB_DATABASE: ${DB_NAME}
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro #pour les utilisateurs
     networks:
       - my_network
 
