@@ -98,8 +98,9 @@ Les utilisateurs MongoDB sont créés dans init-mongo.js :
     writer : rôle readWrite - Lecture/écriture (CRUD)
 
     reader : rôle read - Lecture Seul
+    
 **Pour changer d’utilisateur, il faut de modifier les paramètres user et password dans l’appel à connect_mongo : 
-connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd")** --> A revoir 
+connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd") - ou dans environnement ** --> A revoir 
 
 
 
@@ -121,11 +122,14 @@ pip install -r requirements.txt
 docker-compose up -d
 
 ## Usages
-Charger le CSV et insérer dans MongoDB : python script/main.py
-Test : pour exécuter la suite de tests de l'application : 
+Charger le CSV et insérer dans MongoDB :   
+docker compose run --rm app pytest test/main_test.py
+
+Test : pour exécuter la suite de tests de l'application :   
 docker-compose run app pytest test/main_test.py
 
-Notes
-.env n’est pas versionné pour sécuriser les URI et infos sensibles.
+Notes  
+.env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans init-mongo.js.
+
 
