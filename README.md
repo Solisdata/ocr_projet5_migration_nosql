@@ -107,16 +107,16 @@ connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd")
 ## Prérequis
 - Installer Docker & Docker Compose
 - Configuer un fichier d'environnement .env  à la racine a vec les variables suivantes : 
-     #informations sur la base de données mongodb
-     DB_NAME=
-     COLLECTION_NAME=
-     #pour les users_roles
-     MONGO_ROOT_USER=admin
-     MONGO_ROOT_PASS=
-     READER_USER=reader
-     READER_PASS=
-     WRITER_USER=writer
-     WRITER_PASS=
+     #informations sur la base de données mongodb  
+     DB_NAME=  
+     COLLECTION_NAME=  
+     #pour les users_roles  
+     MONGO_ROOT_USER=admin  
+     MONGO_ROOT_PASS=  
+     READER_USER=reader  
+     READER_PASS=  
+     WRITER_USER=writer  
+     WRITER_PASS=  
 
   
 ## Installation
@@ -142,6 +142,7 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
