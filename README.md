@@ -121,12 +121,14 @@ connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd")
   
 ## Installation
 
+Vous pouvez suivre les instructions du script `setup_project.sh` ou faire les étapes manuellement : : 
+
 1. Cloner le projet  
 git clone <repo-url>
 cd <project-folder>
 
 2.  Activer environnement :
-env\Scripts\activate
+ .venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 
 3. Lancer les conteneurs Docker
@@ -142,6 +144,7 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
