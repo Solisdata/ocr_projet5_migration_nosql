@@ -37,22 +37,22 @@ Pymongo
 
 Chaque document patient contient :
 
-{
-  "Name": "string",
-  "Age": "int",
-  "Gender": "string",
-  "Blood Type": "string",
-  "Medical Condition": "string",
-  "Doctor": "string",
-  "Hospital": "string",
-  "Room Number": "int",
-  "Insurance Provider": "string",
-  "Admission Type": "string",
-  "Medication": "string",
-  "Test Results": "string",
-  "Billing Amount": "float/null",
-  "Date of Admission": "datetime",
-  "Discharge Date": "datetime"
+{  
+  "Name": "string",  
+  "Age": "int",  
+  "Gender": "string",  
+  "Blood Type": "string",  
+  "Medical Condition": "string",  
+  "Doctor": "string",  
+  "Hospital": "string",  
+  "Room Number": "int",  
+  "Insurance Provider": "string",  
+  "Admission Type": "string",  
+  "Medication": "string",  
+  "Test Results": "string",  
+  "Billing Amount": "float/null",  
+  "Date of Admission": "datetime",  
+  "Discharge Date": "datetime"  
 }
 
 -- 
@@ -142,6 +142,7 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
