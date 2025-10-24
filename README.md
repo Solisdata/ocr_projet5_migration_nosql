@@ -37,25 +37,23 @@ Pymongo
 
 Chaque document patient contient :
 
-| Champ              | Type       | Description             | Remarques / contraintes         |
-|-------------------|------------|------------------------|--------------------------------|
-| Name              | string     | Nom du patient          | Capitalisé, obligatoire        |
-| Age               | int        | Âge du patient          |                                |
-| Gender            | string     | Sexe                    | "M", "F", etc.                 |
-| Blood Type        | string     | Groupe sanguin          |                                |
-| Medical Condition | string     | Pathologie              |                                |
-| Doctor            | string     | Médecin en charge       |                                |
-| Hospital          | string     | Hôpital                 |                                |
-| Room Number       | int        | Numéro de chambre       |                                |
-| Insurance Provider| string     | Assurance               |                                |
-| Admission Type    | string     | Type d’admission        | Exemple : Emergency, Routine   |
-| Medication        | string     | Médicaments prescrits   |                                |
-| Test Results      | string     | Résultats des tests     |                                |
-| Billing Amount    | float/null | Montant de facturation  | Doit être ≥ 0 ou null          |
-| Date of Admission | datetime   | Date d’admission        |                                |
-| Discharge Date    | datetime   | Date de sortie          |                                |
-
-
+{
+  "Name": "string",
+  "Age": "int",
+  "Gender": "string",
+  "Blood Type": "string",
+  "Medical Condition": "string",
+  "Doctor": "string",
+  "Hospital": "string",
+  "Room Number": "int",
+  "Insurance Provider": "string",
+  "Admission Type": "string",
+  "Medication": "string",
+  "Test Results": "string",
+  "Billing Amount": "float/null",
+  "Date of Admission": "datetime",
+  "Discharge Date": "datetime"
+}
 
 -- 
 ## Architecture
@@ -99,7 +97,7 @@ Les utilisateurs MongoDB sont créés dans init-mongo.js :
 
     reader : rôle read - Lecture Seul
     
-**Pour se connecter utiliser la commande : mongosh --host mongo:27017 -u <user> -p --authenticationDatabase ma_bd" puis rentrer le mot de passe.**
+**Pour se connecter utiliser la commande : docker-compose exec mongo mongosh --host mongo --port 27017 -u <username> -p <password> --authenticationDatabase <db> puis rentrer le mot de passe.**
 
 Ou, cans le code : 
 connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd") 
@@ -108,7 +106,18 @@ connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd")
 
 ## Prérequis
 - Installer Docker & Docker Compose
-- Configuer un fichier d'environnement .env  à la racine
+- Configuer un fichier d'environnement .env  à la racine a vec les variables suivantes : 
+     #informations sur la base de données mongodb
+     DB_NAME=
+     COLLECTION_NAME=
+     #pour les users_roles
+     MONGO_ROOT_USER=admin
+     MONGO_ROOT_PASS=
+     READER_USER=reader
+     READER_PASS=
+     WRITER_USER=writer
+     WRITER_PASS=
+
   
 ## Installation
 
@@ -125,14 +134,15 @@ docker-compose up -d
 
 ## Usages
 Charger le CSV et insérer dans MongoDB :   
-docker compose run --rm app pytest test/main_test.py
+docker compose run --rm app python main.py
 
 Test : pour exécuter la suite de tests de l'application :   
 docker-compose run app pytest test/main_test.py
 
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
-Les mots de passe MongoDB sont définis dans init-mongo.js.
+Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
