@@ -99,8 +99,10 @@ Les utilisateurs MongoDB sont créés dans init-mongo.js :
 
     reader : rôle read - Lecture Seul
     
-**Pour changer d’utilisateur, il faut de modifier les paramètres user et password dans l’appel à connect_mongo : 
-connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd") - ou dans environnement ** --> A revoir 
+**Pour se connecter utiliser la commande : mongosh --host mongo:27017 -u <user> -p --authenticationDatabase ma_bd" puis rentrer le mot de passe.**
+
+Ou, cans le code : 
+connect_mongo(user, password, host="mongo", port=27017, db_name="ma_bd") 
 
 
 
@@ -131,5 +133,6 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans init-mongo.js.
+
 
 
