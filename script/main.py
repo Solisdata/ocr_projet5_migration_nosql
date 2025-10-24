@@ -61,14 +61,24 @@ def connect_mongo(user=MONGO_ROOT_USER, password=MONGO_ROOT_PASS, db_name=DB_NAM
 
 
 
+#insertion data
 
-def create_patient(collection, data):
-    """Insère un document dans la collection"""
-    return collection.insert_one(data).inserted_id
+def insert_data(collection, df):
+    "Insère un DataFrame dans la collection"
+    #collection.drop()
+    data_dict = df.to_dict("records")
+    collection.insert_many(data_dict)
+    print(f"{len(data_dict)} documents insérés.")
 
 def read_patient(collection, filter_query):
     """Récupère un document correspondant au filtre"""
     return collection.find_one(filter_query)
+
+def read_many(collection, filter_query=None):
+    """Récupère plusieurs documents correspondant au filtre"""
+    if filter_query is None:
+        filter_query = {}
+    return list(collection.find(filter_query))
 
 def update_patient(collection, filter_query, update_values):
     """Met à jour un document correspondant au filtre"""
@@ -79,14 +89,6 @@ def delete_patient(collection, filter_query):
     return collection.delete_one(filter_query).deleted_count
 
 
-#insertion data
-
-def insert_data(collection, df):
-    "Insère un DataFrame dans la collection"
-    #collection.drop()
-    data_dict = df.to_dict("records")
-    collection.insert_many(data_dict)
-    print(f"{len(data_dict)} documents insérés.")
 
 
 # Fonction principale
