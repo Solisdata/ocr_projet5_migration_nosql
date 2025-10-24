@@ -1,26 +1,34 @@
 // init-mongo.js
 
-// Base de ton application
-db = db.getSiblingDB("ma_bd");
+// Récupération des variables d'environnement
+const dbName = process.env.DB_NAME;
+const readerUser = process.env.READER_USER;
+const readerPass = process.env.READER_PASS;
+const writerUser = process.env.WRITER_USER;
+const writerPass = process.env.WRITER_PASS;
+const rootUser = process.env.MONGO_ROOT_USER;
+const rootPass = process.env.MONGO_ROOT_PASS;
 
-// --- 1. Utilisateur Lecture Seule (READER) ---
+// Sélection de la base
+const db = db.getSiblingDB(dbName);
+
+// --- 1. Utilisateur Lecture Seule ---
 db.createUser({
-  user: "reader",
-  pwd: "Jozrjn87sd!",
-  roles: [ { role: "read", db: "ma_bd" } ]
+  user: readerUser,
+  pwd: readerPass,
+  roles: [ { role: "read", db: dbName } ]
 });
 
-
-// --- 2. Utilisateur Lecture/Écriture (WRITER) ---
+// --- 2. Utilisateur Lecture/Écriture ---
 db.createUser({
-  user: "writer",
-  pwd: "Hiskdsoa98!",
-  roles: [ { role: "readWrite", db: "ma_bd" } ]
+  user: writerUser,
+  pwd: writerPass,
+  roles: [ { role: "readWrite", db: dbName } ]
 });
 
-//  Utilisateur admin 
+// --- 3. Utilisateur Admin ---
 db.createUser({
-  user: "admin",
-  pwd: "Massyhfkd2", 
-  roles: [ { role: "dbAdmin", db: "ma_bd" } ]
+  user: rootUser,
+  pwd: rootPass,
+  roles: [ { role: "dbAdmin", db: dbName } ]
 });
