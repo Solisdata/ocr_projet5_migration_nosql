@@ -27,16 +27,16 @@ project/
 ├── data/  
 │   └── healthcare_dataset.csv       # Dataset source  
 ├── scripts/  
-│   ├── main.py                     # Script principal pour charger, nettoyer et insérer les données dans MongoDB  
-│   └── test_main.py                # Tests du script principal  
+│   ├── main.py                      # Script principal pour charger, nettoyer et insérer les données dans MongoDB  
+│   └── test_main.py                 # Tests du script principal  
 ├── setup/  
-│   ├── Dockerfile                  # Dockerfile pour l'application  
-│   ├── Dockerfile.test             # Dockerfile pour exécuter les tests  
-│   └── init-mongo.js               # Script d’initialisation de MongoDB (création utilisateurs et rôles)  
-│   └── setup_project.sh            # Script pour configurer et lancer le projet  
-├── docker-compose.yml              # Configuration des conteneurs Docker (MongoDB + application + test)  
-├── .env.template                   # Variables d’environnement - à configurer   
-└── requirements.txt                # Liste des dépendances Python nécessaires à l’exécution des scripts  
+│   ├── Dockerfile                   # Dockerfile pour l'application  
+│   ├── Dockerfile.test              # Dockerfile pour exécuter les tests  
+│   └── init-mongo.js                # Script d’initialisation de MongoDB (création utilisateurs et rôles)  
+│   └── setup_project.sh             # Script pour configurer et lancer le projet  
+├── docker-compose.yml               # Configuration des conteneurs Docker (MongoDB + application + test)  
+├── .env.template                    # Variables d’environnement - à configurer   
+└── requirements.txt                 # Liste des dépendances Python nécessaires à l’exécution des scripts  
 
 
 ---
@@ -152,6 +152,7 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
