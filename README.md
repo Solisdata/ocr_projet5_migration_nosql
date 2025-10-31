@@ -10,16 +10,16 @@ Le système ne suit plus la charge (performance qui chutent, perte de données, 
 Le problème vient de l’incapacité de leur système actuel à gérer: 
  - le volume (quantités de données),
  - la variété (diversité des formats : dossier médicaux, IRM…)
- -  la vélocité des données médicales (vitesse à laquelle les données sont produites)
+ -  la vélocité des données médicales (vitesse à laquelle les données sont produites)  
 Le projet consiste à déployer les données médicales sur **MongoDB** pour stocker et gérer des informations variées tout en maintenant de bonnes performances même lorsque le volume de données augmente.
 Les applications sont contenues dans **des conteneurs Docker** pour faciliter le déploiement, l’exécution et la reproductibilité de l’environnement. L’**infrastructure AWS** est utilisée pour stocker, traiter et distribuer les données à grande échelle, garantissant scalabilité, sécurité et accessibilité.
 
 
 ## Technologies utilisées
-Python
-MongoDB
-Docker
-Pymongo
+Python  
+MongoDB  
+Docker  
+Pymongo  
 
 ## Contenu du projet
 ```
@@ -152,6 +152,7 @@ docker-compose run app pytest test/main_test.py
 Notes  
 .env n’est pas versionné pour sécuriser les URI et infos sensibles.  
 Les mots de passe MongoDB sont définis dans le .env. 
+
 
 
 
