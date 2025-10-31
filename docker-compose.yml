@@ -16,12 +16,14 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d:ro #pour les utilisateurs
+      - ./setup/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     networks:
       - my_network
 
   app:
-    build: .
+    build:
+      context : .
+      dockerfile: setup/Dockerfile
     container_name: healthcare_app_new
     restart: "no"
     networks:
@@ -40,7 +42,7 @@ services:
   tests:
     build:
       context: .
-      dockerfile: Dockerfile.test
+      dockerfile: setup/Dockerfile.test
     container_name: healthcare_tests
     networks:
       - my_network
